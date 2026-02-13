@@ -30,7 +30,6 @@
             background: url('us1.jpg') center/cover;
             border: 3px solid transparent; cursor: pointer; transition: 0.3s;
             background-color: #333;
-            /* Optimization: GPU assist */
             will-change: transform;
         }
         .profile-img:hover { border-color: white; transform: scale(1.05); }
@@ -56,7 +55,7 @@
         /* HERO SECTION */
         .hero {
             height: 85vh;
-            /* Optimization: Ensure image covers well */
+            /* Tries to load us1.jpg. If missing, it will be black. */
             background: linear-gradient(to right, rgba(0,0,0,0.9) 30%, transparent 90%), url('us1.jpg') center/cover;
             display: flex; align-items: center; padding: 0 4%; margin-bottom: 20px;
         }
@@ -75,14 +74,12 @@
         .top10-row { padding: 20px 4%; }
         .top10-scroller { 
             display: flex; overflow-x: auto; padding: 20px 0; gap: 40px; 
-            /* Optimization: Smooth Scrolling on Mobile */
             scrollbar-width: none; -webkit-overflow-scrolling: touch; 
         }
         .top10-scroller::-webkit-scrollbar { display: none; }
         
         .top10-card { 
             position: relative; min-width: 160px; height: 220px; cursor: pointer; transition: 0.3s; 
-            /* Optimization: Prevents Jitter */
             will-change: transform; transform: translateZ(0);
         }
         .top10-card:hover { transform: scale(1.1); z-index: 10; }
@@ -93,12 +90,11 @@
         }
         .top10-img { width: 100%; height: 100%; object-fit: cover; border-radius: 4px; background-color: #222; }
 
-        /* STANDARD ROWS */
+        /* ROWS */
         .row { padding: 20px 4%; }
         .row h2 { margin-bottom: 10px; font-size: 1.4rem; color: #e5e5e5; }
         .row-scroller {
             display: flex; overflow-x: auto; gap: 15px; padding-bottom: 20px; 
-            /* Optimization: Smooth Scrolling */
             scrollbar-width: none; -webkit-overflow-scrolling: touch;
         }
         .row-scroller::-webkit-scrollbar { display: none; }
@@ -107,7 +103,6 @@
             min-width: 280px; height: 160px; border-radius: 4px; cursor: pointer;
             position: relative; overflow: hidden; transition: 0.3s;
             background: #222;
-            /* Optimization: Prevents Jitter */
             will-change: transform; transform: translateZ(0);
         }
         .card:hover { transform: scale(1.05); z-index: 10; }
@@ -118,17 +113,22 @@
             background: linear-gradient(transparent, black); font-size: 0.9rem; font-weight: bold;
         }
 
+        /* ERROR MESSAGE FOR MISSING IMAGES */
+        img[alt]:after {  
+            display: block; position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
+            background-color: #330000; color: white; content: attr(alt); 
+            font-size: 12px; padding: 10px; border: 1px solid red;
+        }
+
         /* COMING SOON */
         .coming-soon { padding: 40px 4%; margin-top: 40px; background: rgba(255,255,255,0.05); }
         .cs-item { display: flex; gap: 20px; margin-bottom: 20px; align-items: center; }
-        .cs-text h3 { color: var(--netflix-red); margin-bottom: 5px; }
 
         /* MODALS */
         #contextModal, #slideshowModal {
             display: none; position: fixed; inset: 0; z-index: 2000;
             background: rgba(0,0,0,0.95); align-items: center; justify-content: center;
         }
-        /* Context Modal Style */
         .modal-box {
             background: #181818; width: 90%; max-width: 700px; border-radius: 8px;
             overflow: hidden; position: relative; max-height: 90vh; overflow-y: auto;
@@ -142,8 +142,6 @@
             color: white; width: 35px; height: 35px; border-radius: 50%;
             display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 20px;
         }
-
-        /* Slideshow Modal Style */
         #slideImg { max-width: 100%; max-height: 100vh; object-fit: contain; }
 
     </style>
@@ -181,19 +179,19 @@
         <div class="top10-scroller">
             <div class="top10-card" onclick="openContext(5)">
                 <div class="rank-num">1</div>
-                <img src="us6.jpg" class="top10-img" loading="lazy" decoding="async">
+                <img src="us6.jpg" class="top10-img" alt="Missing: us6.jpg" loading="lazy" decoding="async">
             </div>
             <div class="top10-card" onclick="openContext(1)">
                 <div class="rank-num">2</div>
-                <img src="us2.webp" class="top10-img" loading="lazy" decoding="async">
+                <img src="us2.webp" class="top10-img" alt="Missing: us2.webp" loading="lazy" decoding="async">
             </div>
             <div class="top10-card" onclick="openContext(7)">
                 <div class="rank-num">3</div>
-                <img src="us8.jpg" class="top10-img" loading="lazy" decoding="async">
+                <img src="us8.jpg" class="top10-img" alt="Missing: us8.jpg" loading="lazy" decoding="async">
             </div>
              <div class="top10-card" onclick="openContext(3)">
                 <div class="rank-num">4</div>
-                <img src="us4.jpg" class="top10-img" loading="lazy" decoding="async">
+                <img src="us4.jpg" class="top10-img" alt="Missing: us4.jpg" loading="lazy" decoding="async">
             </div>
         </div>
     </div>
@@ -201,47 +199,29 @@
     <div class="row">
         <h2>Season 1: The Beginning</h2>
         <div class="row-scroller">
-            <div class="card" onclick="openContext(1)">
-                <img src="us2.webp" loading="lazy" decoding="async">
-                <div class="card-title">Our First Date</div>
-            </div>
-            <div class="card" onclick="openContext(2)">
-                <img src="us3.jpg" loading="lazy" decoding="async">
-                <div class="card-title">Our Journey</div>
-            </div>
-            <div class="card" onclick="openContext(3)">
-                <img src="us4.jpg" loading="lazy" decoding="async">
-                <div class="card-title">Politics Debate</div>
-            </div>
+            <div class="card" onclick="openContext(1)"><img src="us2.webp" alt="Missing: us2.webp" loading="lazy"><div class="card-title">Our First Date</div></div>
+            <div class="card" onclick="openContext(2)"><img src="us3.jpg" alt="Missing: us3.jpg" loading="lazy"><div class="card-title">Our Journey</div></div>
+            <div class="card" onclick="openContext(3)"><img src="us4.jpg" alt="Missing: us4.jpg" loading="lazy"><div class="card-title">Politics Debate</div></div>
         </div>
     </div>
 
     <div class="row">
         <h2>Season 2: Us Against The World</h2>
         <div class="row-scroller">
-            <div class="card" onclick="openContext(4)">
-                <img src="us5.jpg" loading="lazy" decoding="async">
-                <div class="card-title">Just Between Us</div>
-            </div>
-            <div class="card" onclick="openContext(5)">
-                <img src="us6.jpg" loading="lazy" decoding="async">
-                <div class="card-title">Favorite Moments</div>
-            </div>
-            <div class="card" onclick="openContext(6)">
-                <img src="us7.jpg" loading="lazy" decoding="async">
-                <div class="card-title">Inside Jokes</div>
-            </div>
+            <div class="card" onclick="openContext(4)"><img src="us5.jpg" alt="Missing: us5.jpg" loading="lazy"><div class="card-title">Just Between Us</div></div>
+            <div class="card" onclick="openContext(5)"><img src="us6.jpg" alt="Missing: us6.jpg" loading="lazy"><div class="card-title">Favorite Moments</div></div>
+            <div class="card" onclick="openContext(6)"><img src="us7.jpg" alt="Missing: us7.jpg" loading="lazy"><div class="card-title">Inside Jokes</div></div>
         </div>
     </div>
 
     <div class="row">
         <h2>Continue Watching for Paul</h2>
         <div class="row-scroller">
-            <div class="card" onclick="startSlideshowFrom(11)"><img src="us12.jpg" loading="lazy" decoding="async"></div>
-            <div class="card" onclick="startSlideshowFrom(12)"><img src="us13.jpg" loading="lazy" decoding="async"></div>
-            <div class="card" onclick="startSlideshowFrom(13)"><img src="us14.jpg" loading="lazy" decoding="async"></div>
-            <div class="card" onclick="startSlideshowFrom(14)"><img src="us15.jpg" loading="lazy" decoding="async"></div>
-            <div class="card" onclick="startSlideshowFrom(15)"><img src="us16.jpg" loading="lazy" decoding="async"></div>
+            <div class="card" onclick="startSlideshowFrom(11)"><img src="us12.jpg" alt="Missing: us12.jpg" loading="lazy"></div>
+            <div class="card" onclick="startSlideshowFrom(12)"><img src="us13.jpg" alt="Missing: us13.jpg" loading="lazy"></div>
+            <div class="card" onclick="startSlideshowFrom(13)"><img src="us14.jpg" alt="Missing: us14.jpg" loading="lazy"></div>
+            <div class="card" onclick="startSlideshowFrom(14)"><img src="us15.jpg" alt="Missing: us15.jpg" loading="lazy"></div>
+            <div class="card" onclick="startSlideshowFrom(15)"><img src="us16.jpg" alt="Missing: us16.jpg" loading="lazy"></div>
         </div>
     </div>
 
@@ -252,13 +232,6 @@
             <div class="cs-text">
                 <h3>The Wedding Special</h3>
                 <p>Starring Us. Featuring "Beautiful in White".</p>
-            </div>
-        </div>
-        <div class="cs-item">
-            <div style="font-size: 2rem;">❤️</div>
-            <div class="cs-text">
-                <h3>The Forever Valentine</h3>
-                <p>A lifetime series of spoiling you.</p>
             </div>
         </div>
     </div>
@@ -286,6 +259,31 @@
 <audio id="music" loop><source src="song.mp3" type="audio/mpeg"></audio>
 
 <script>
+    // --- THIS IS THE LIST OF IMAGES ---
+    // If a picture is missing, check this list.
+    const allImages = [
+        "us1.jpg", 
+        "us2.webp",   // <--- This is the only .webp
+        "us3.jpg", 
+        "us4.jpg", 
+        "us5.jpg", 
+        "us6.jpg", 
+        "us7.jpg", 
+        "us8.jpg", 
+        "us9.jpg", 
+        "us10.jpg", 
+        "us11.jpg", 
+        "us12.jpg", 
+        "us13.jpg", 
+        "us14.jpg", 
+        "us15.jpg", 
+        "us16.jpg", 
+        "us17.jpg", 
+        "us18.jpg", 
+        "us19.jpg", 
+        "us20.jpg"
+    ];
+
     // --- STORY DATA ---
     const stories = [
         { title: "The Day We Met", img: "us1.jpg", text: "We met at work when I was asked to train you. I fell for you instantly, even though you didn’t like my vibe at first 😅. I kept pushing, and one day it worked. The day you left, we went home together — and that’s when everything clicked." },
@@ -300,16 +298,6 @@
         { title: "When You Accepted...", img: "us10.jpg", text: "You made me the happiest man in the whole world. I was so excited to spend the rest of my life loving and spoiling you until uchoke babe." },
         { title: "From Me To You", img: "us11.jpg", text: "I will always be thankful that we met. You have changed my life in so many ways. There is nothing I would want more than to spend the rest of my life with my forever Valentine." }
     ];
-
-    // --- SLIDESHOW IMAGE LIST ---
-    const allImages = [];
-    for(let i=1; i<=20; i++) {
-        if (i === 2) {
-            allImages.push("us2.webp");
-        } else {
-            allImages.push(`us${i}.jpg`);
-        }
-    }
 
     // --- LOGIC ---
     document.getElementById("password").addEventListener("keypress", function(e) {
@@ -356,10 +344,6 @@
     function nextSlide() {
         slideIndex = (slideIndex + 1) % allImages.length;
         showSlide();
-        // OPTIMIZATION: Preload next image logic
-        const nextIdx = (slideIndex + 1) % allImages.length;
-        const nextImg = new Image();
-        nextImg.src = allImages[nextIdx];
     }
 
     function showSlide() {
