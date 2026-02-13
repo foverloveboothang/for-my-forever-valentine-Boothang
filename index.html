@@ -5,72 +5,85 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>For My Forever Valentine</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400&display=swap" rel="stylesheet">
 
 <style>
+
 *{margin:0;padding:0;box-sizing:border-box;}
 
 body{
-background:#f5f2ea;
+background:#f6f2ea;
 font-family:'Inter',sans-serif;
 color:#1d1d1f;
 scroll-behavior:smooth;
-}
-
-section{
-min-height:100vh;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-padding:80px 8%;
-text-align:center;
-scroll-snap-align:start;
 }
 
 html{
 scroll-snap-type:y mandatory;
 }
 
-h1{
-font-family:'Playfair Display',serif;
-font-size:44px;
-margin-bottom:30px;
+section{
+min-height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+padding:100px 8%;
+scroll-snap-align:start;
 }
 
-h2{
+.container{
+max-width:1200px;
+display:flex;
+gap:60px;
+align-items:center;
+justify-content:space-between;
+flex-wrap:wrap;
+}
+
+.text{
+flex:1;
+min-width:300px;
+}
+
+.text h1,.text h2{
 font-family:'Playfair Display',serif;
-font-size:30px;
 margin-bottom:25px;
 }
 
-p{
-max-width:800px;
+.text h1{font-size:46px;}
+.text h2{font-size:32px;}
+
+.text p{
 font-size:18px;
 line-height:1.8;
-margin-bottom:35px;
+margin-bottom:20px;
 }
 
 .images{
+flex:1;
 display:flex;
-gap:25px;
+gap:20px;
 flex-wrap:wrap;
 justify-content:center;
 }
 
 .images img{
 width:320px;
-max-width:90%;
-border-radius:18px;
-box-shadow:0 20px 50px rgba(0,0,0,0.08);
+max-width:100%;
+border-radius:20px;
+box-shadow:0 25px 60px rgba(0,0,0,0.08);
+transition:transform .8s ease, opacity 1s ease;
 opacity:0;
-transform:translateY(30px);
-transition:all 1.2s ease;
+transform:translateY(40px);
 }
 
-.images img.visible{
+.images img.show{
 opacity:1;
 transform:translateY(0);
+}
+
+.reverse{
+flex-direction:row-reverse;
 }
 
 #login{
@@ -79,14 +92,14 @@ display:flex;
 flex-direction:column;
 justify-content:center;
 align-items:center;
-background:#f5f2ea;
+background:#f6f2ea;
 }
 
 input{
 padding:15px;
 width:260px;
-border:1px solid #d8d2c5;
-border-radius:10px;
+border:1px solid #ddd2c4;
+border-radius:12px;
 text-align:center;
 }
 
@@ -96,17 +109,25 @@ padding:12px 30px;
 background:#1d1d1f;
 color:white;
 border:none;
-border-radius:10px;
+border-radius:12px;
 cursor:pointer;
 }
 
 audio{display:none;}
 
-@media(max-width:768px){
-h1{font-size:30px;}
-h2{font-size:22px;}
-p{font-size:16px;}
+@media(max-width:900px){
+.container{
+flex-direction:column;
+text-align:center;
 }
+.reverse{
+flex-direction:column;
+}
+.text h1{font-size:32px;}
+.text h2{font-size:24px;}
+.text p{font-size:16px;}
+}
+
 </style>
 </head>
 
@@ -120,7 +141,10 @@ p{font-size:16px;}
 
 <div id="main" style="display:none;">
 
+<!-- 1 -->
 <section>
+<div class="container">
+<div class="text">
 <h1>The Day We Met</h1>
 <p>
 We met at work when I was asked to train you.
@@ -128,9 +152,14 @@ I fell for you instantly, even though you didn’t like my vibe at first 😅
 I kept pushing, and one day it worked.
 The day you left, we went home together — and that’s when everything clicked.
 </p>
+</div>
+</div>
 </section>
 
+<!-- 2 -->
 <section>
+<div class="container">
+<div class="text">
 <h2>Our First Date</h2>
 <p>
 We went bowling, did a little shopping, and explored together.
@@ -138,36 +167,50 @@ I was excited and nervous at first, but it turned into such a fun day.
 We laughed, enjoyed every moment, and you completely surprised me — especially at bowling 😍
 That day will always stay with me.
 </p>
+</div>
 <div class="images">
-<img src="us27.jpg" loading="lazy">
-<img src="us2.webp" loading="lazy">
+<img src="us27.jpg">
+<img src="us2.webp">
+</div>
 </div>
 </section>
 
+<!-- 3 -->
 <section>
+<div class="container reverse">
+<div class="text">
 <h2>Our Journey</h2>
 <p>
 Surely love at first sight.
 From bowling to shopping and exploring.
 </p>
+</div>
 <div class="images">
-<img src="us4.jpg" loading="lazy">
-<img src="us5.jpg" loading="lazy">
+<img src="us4.jpg">
+<img src="us5.jpg">
+</div>
 </div>
 </section>
 
+<!-- 4 -->
 <section>
+<div class="container">
+<div class="text">
 <h2>Our Ups and Downs</h2>
 <p>
 We fought about politics — Raila vs Ruto 😅
 We even slept mad and continued the argument kidogo the next morning.
 But we talked it out… and love won 🤍
 </p>
+</div>
 <div class="images">
-<img src="us1.jpg" loading="lazy">
-<img src="us23.jpg" loading="lazy">
+<img src="us1.jpg">
+<img src="us23.jpg">
+</div>
 </div>
 </section>
+
+<!-- Continue remaining sections in same pattern using your order -->
 
 </div>
 
@@ -185,16 +228,16 @@ document.getElementById("music").play();
 }
 }
 
-const imgs=document.querySelectorAll("img");
+const images=document.querySelectorAll("img");
 const observer=new IntersectionObserver(entries=>{
 entries.forEach(entry=>{
 if(entry.isIntersecting){
-entry.target.classList.add("visible");
+entry.target.classList.add("show");
 }
 });
-},{threshold:0.3});
+},{threshold:0.2});
 
-imgs.forEach(img=>observer.observe(img));
+images.forEach(img=>observer.observe(img));
 
 </script>
 
