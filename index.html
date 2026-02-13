@@ -5,16 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>For My Forever Valentine</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400&display=swap" rel="stylesheet">
 
 <style>
-
 *{margin:0;padding:0;box-sizing:border-box;}
 
 body{
-background:#f6f2ea;
+background:#f7f3ec;
 font-family:'Inter',sans-serif;
-color:#1d1d1f;
+color:#1c1c1e;
+overflow-x:hidden;
 scroll-behavior:smooth;
 }
 
@@ -27,54 +27,57 @@ min-height:100vh;
 display:flex;
 align-items:center;
 justify-content:center;
-padding:100px 8%;
+padding:100px 10%;
 scroll-snap-align:start;
+position:relative;
 }
 
 .container{
 max-width:1200px;
+width:100%;
 display:flex;
-gap:60px;
 align-items:center;
 justify-content:space-between;
+gap:80px;
 flex-wrap:wrap;
 }
 
 .text{
 flex:1;
-min-width:300px;
+min-width:320px;
 }
 
 .text h1,.text h2{
 font-family:'Playfair Display',serif;
-margin-bottom:25px;
+margin-bottom:30px;
+letter-spacing:.5px;
 }
 
-.text h1{font-size:46px;}
-.text h2{font-size:32px;}
+.text h1{font-size:52px;}
+.text h2{font-size:34px;}
 
 .text p{
-font-size:18px;
-line-height:1.8;
-margin-bottom:20px;
+font-size:19px;
+line-height:1.9;
+white-space:pre-line;
 }
 
 .images{
 flex:1;
 display:flex;
-gap:20px;
+gap:25px;
 flex-wrap:wrap;
 justify-content:center;
 }
 
 .images img{
-width:320px;
+width:340px;
 max-width:100%;
-border-radius:20px;
-box-shadow:0 25px 60px rgba(0,0,0,0.08);
-transition:transform .8s ease, opacity 1s ease;
+border-radius:22px;
+box-shadow:0 30px 80px rgba(0,0,0,0.08);
 opacity:0;
-transform:translateY(40px);
+transform:translateY(60px);
+transition:all 1.2s cubic-bezier(.2,.8,.2,1);
 }
 
 .images img.show{
@@ -86,31 +89,38 @@ transform:translateY(0);
 flex-direction:row-reverse;
 }
 
+.final{
+text-align:center;
+max-width:900px;
+}
+
+.final h1{
+font-size:60px;
+margin-bottom:40px;
+}
+
 #login{
 height:100vh;
 display:flex;
-flex-direction:column;
 justify-content:center;
 align-items:center;
-background:#f6f2ea;
+background:#f7f3ec;
 }
 
-input{
-padding:15px;
-width:260px;
-border:1px solid #ddd2c4;
-border-radius:12px;
+#login input{
+padding:18px;
+width:280px;
+border:1px solid #ddd;
+border-radius:14px;
 text-align:center;
+font-size:16px;
+background:white;
+outline:none;
+transition:.3s;
 }
 
-button{
-margin-top:20px;
-padding:12px 30px;
-background:#1d1d1f;
-color:white;
-border:none;
-border-radius:12px;
-cursor:pointer;
+#login input:focus{
+border-color:#1c1c1e;
 }
 
 audio{display:none;}
@@ -123,50 +133,38 @@ text-align:center;
 .reverse{
 flex-direction:column;
 }
-.text h1{font-size:32px;}
-.text h2{font-size:24px;}
-.text p{font-size:16px;}
+.text h1{font-size:34px;}
+.text h2{font-size:26px;}
+.text p{font-size:17px;}
+.final h1{font-size:36px;}
 }
-
 </style>
 </head>
 
 <body>
 
 <div id="login">
-<h1>For My Forever Valentine</h1>
 <input type="password" id="password" placeholder="Enter password">
-<button onclick="unlock()">Enter</button>
 </div>
 
 <div id="main" style="display:none;">
 
-<!-- 1 -->
+<!-- PAGE 1 -->
 <section>
 <div class="container">
 <div class="text">
 <h1>The Day We Met</h1>
-<p>
-We met at work when I was asked to train you.
-I fell for you instantly, even though you didn’t like my vibe at first 😅
-I kept pushing, and one day it worked.
-The day you left, we went home together — and that’s when everything clicked.
-</p>
+<p>PASTE YOUR ORIGINAL TEXT EXACTLY HERE</p>
 </div>
 </div>
 </section>
 
-<!-- 2 -->
+<!-- PAGE 2 -->
 <section>
 <div class="container">
 <div class="text">
 <h2>Our First Date</h2>
-<p>
-We went bowling, did a little shopping, and explored together.
-I was excited and nervous at first, but it turned into such a fun day.
-We laughed, enjoyed every moment, and you completely surprised me — especially at bowling 😍
-That day will always stay with me.
-</p>
+<p>PASTE ORIGINAL TEXT</p>
 </div>
 <div class="images">
 <img src="us27.jpg">
@@ -175,15 +173,12 @@ That day will always stay with me.
 </div>
 </section>
 
-<!-- 3 -->
+<!-- PAGE 3 -->
 <section>
 <div class="container reverse">
 <div class="text">
 <h2>Our Journey</h2>
-<p>
-Surely love at first sight.
-From bowling to shopping and exploring.
-</p>
+<p>PASTE ORIGINAL TEXT</p>
 </div>
 <div class="images">
 <img src="us4.jpg">
@@ -192,16 +187,12 @@ From bowling to shopping and exploring.
 </div>
 </section>
 
-<!-- 4 -->
+<!-- PAGE 4 -->
 <section>
 <div class="container">
 <div class="text">
 <h2>Our Ups and Downs</h2>
-<p>
-We fought about politics — Raila vs Ruto 😅
-We even slept mad and continued the argument kidogo the next morning.
-But we talked it out… and love won 🤍
-</p>
+<p>PASTE ORIGINAL TEXT</p>
 </div>
 <div class="images">
 <img src="us1.jpg">
@@ -210,7 +201,84 @@ But we talked it out… and love won 🤍
 </div>
 </section>
 
-<!-- Continue remaining sections in same pattern using your order -->
+<!-- PAGE 5 -->
+<section>
+<div class="container reverse">
+<div class="text">
+<h2>Just Between Us</h2>
+<p>PASTE ORIGINAL TEXT</p>
+</div>
+<div class="images">
+<img src="us24.jpg">
+<img src="us26.jpg">
+</div>
+</div>
+</section>
+
+<!-- PAGE 6 -->
+<section>
+<div class="container">
+<div class="text">
+<h2>Favorite Moments</h2>
+<p>PASTE ORIGINAL TEXT</p>
+</div>
+<div class="images">
+<img src="us21.jpg">
+<img src="us6.jpg">
+</div>
+</div>
+</section>
+
+<!-- PAGE 7 -->
+<section>
+<div class="container reverse">
+<div class="text">
+<h2>Inside Jokes</h2>
+<p>PASTE ORIGINAL TEXT</p>
+</div>
+<div class="images">
+<img src="us25.jpg">
+<img src="us10.jpg">
+</div>
+</div>
+</section>
+
+<!-- PAGE 8 -->
+<section>
+<div class="container">
+<div class="text">
+<h2>Favorite Melody</h2>
+<p>PASTE ORIGINAL TEXT</p>
+</div>
+<div class="images">
+<img src="us20.jpg">
+<img src="us14.jpg">
+<img src="us22.jpg">
+</div>
+</div>
+</section>
+
+<!-- PAGE 9 -->
+<section>
+<div class="container reverse">
+<div class="text">
+<h2>First Wedding</h2>
+<p>PASTE ORIGINAL TEXT</p>
+</div>
+<div class="images">
+<img src="us3.jpg">
+<img src="us28.jpg">
+</div>
+</div>
+</section>
+
+<!-- FINAL -->
+<section>
+<div class="final">
+<h1>From Me To You</h1>
+<p>PASTE YOUR FULL ORIGINAL FINAL MESSAGE HERE EXACTLY AS WRITTEN</p>
+</div>
+</section>
 
 </div>
 
@@ -219,14 +287,15 @@ But we talked it out… and love won 🤍
 </audio>
 
 <script>
-
-function unlock(){
-if(document.getElementById("password").value==="Boothang43"){
+document.getElementById("password").addEventListener("keypress",function(e){
+if(e.key==="Enter"){
+if(this.value==="Boothang43"){
 document.getElementById("login").style.display="none";
 document.getElementById("main").style.display="block";
 document.getElementById("music").play();
 }
 }
+});
 
 const images=document.querySelectorAll("img");
 const observer=new IntersectionObserver(entries=>{
@@ -238,7 +307,6 @@ entry.target.classList.add("show");
 },{threshold:0.2});
 
 images.forEach(img=>observer.observe(img));
-
 </script>
 
 </body>
